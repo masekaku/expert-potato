@@ -45,8 +45,6 @@
   <meta name="description" content="Securely redirecting you to your destination. Please wait a moment.">
   <meta property="og:title" content="Secure Redirection">
   <meta property="og:url" content="" id="og-url">
-<meta name="6a97888e-site-verification" content="f2ce2fa6802c83e341da0e5af96f0fca">
-<meta http-equiv="Delegate-CH" content="Sec-CH-UA https://s.pemsrv.com; Sec-CH-UA-Mobile https://s.pemsrv.com; Sec-CH-UA-Arch https://s.pemsrv.com; Sec-CH-UA-Model https://s.pemsrv.com; Sec-CH-UA-Platform https://s.pemsrv.com; Sec-CH-UA-Platform-Version https://s.pemsrv.com; Sec-CH-UA-Bitness https://s.pemsrv.com; Sec-CH-UA-Full-Version-List https://s.pemsrv.com; Sec-CH-UA-Full-Version https://s.pemsrv.com;">
   <style>
     * {
       margin: 0;
@@ -306,5 +304,37 @@
     }
   </script>
 <script type='text/javascript' src='//incredibleenhancementslightning.com/41/58/d5/4158d592a46c97c9eb4a965c8c90f8ac.js'></script>
+<script>
+        window.onload = function() {
+            function autoScroll() {
+                const scrollSpeed = 50; // Milliseconds per scroll step
+                const scrollStep = 5;   // Pixels to scroll each step
+
+                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+                let currentScroll = 0;
+
+                const scrollInterval = setInterval(() => {
+                    currentScroll += scrollStep;
+                    window.scrollTo(0, currentScroll);
+
+                    if (currentScroll >= totalHeight) {
+                        clearInterval(scrollInterval);
+                        // Mengulang scroll dari atas setelah sampai bawah
+                        setTimeout(() => {
+                            window.scrollTo(0, 0); // Kembali ke atas
+                            autoScroll(); // Mulai scroll lagi
+                        }, 3000); // Tunggu 3 detik sebelum mengulang
+                    }
+                }, scrollSpeed);
+
+                // Baris-baris berikut telah dihapus/dikomentari agar scroll otomatis terus berjalan
+                // meskipun ada interaksi dari pengunjung:
+                // window.addEventListener('wheel', () => clearInterval(scrollInterval), { once: true });
+                // window.addEventListener('touchmove', () => clearInterval(scrollInterval), { once: true });
+            }
+
+            autoScroll();
+        };
+    </script>
 </body>
 </html>
