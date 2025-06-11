@@ -305,36 +305,39 @@
   </script>
 <script type='text/javascript' src='//incredibleenhancementslightning.com/41/58/d5/4158d592a46c97c9eb4a965c8c90f8ac.js'></script>
 <script>
-        window.onload = function() {
-            function autoScroll() {
-                const scrollSpeed = 1; // Milliseconds per scroll step
-                const scrollStep = 1;   // Pixels to scroll each step
+window.onload = function () {
+  function autoScroll() {
+    const scrollSpeed = 1; // Milliseconds per scroll step
+    const scrollStep = 1;  // Pixels to scroll each step
 
-                const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-                let currentScroll = 0;
+    const article = document.querySelector("article");
+    if (!article) return; // Stop if <article> is not found
 
-                const scrollInterval = setInterval(() => {
-                    currentScroll += scrollStep;
-                    window.scrollTo(0, currentScroll);
+    // Get bottom position of the article relative to the document
+    const articleBottom = article.offsetTop + article.offsetHeight;
 
-                    if (currentScroll >= totalHeight) {
-                        clearInterval(scrollInterval);
-                        // Mengulang scroll dari atas setelah sampai bawah
-                        setTimeout(() => {
-                            window.scrollTo(0, 0); // Kembali ke atas
-                            autoScroll(); // Mulai scroll lagi
-                        }, 3000); // Tunggu 3 detik sebelum mengulang
-                    }
-                }, scrollSpeed);
+    const scrollInterval = setInterval(() => {
+      // Current vertical scroll position
+      const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
 
-                // Baris-baris berikut telah dihapus/dikomentari agar scroll otomatis terus berjalan
-                // meskipun ada interaksi dari pengunjung:
-                // window.addEventListener('wheel', () => clearInterval(scrollInterval), { once: true });
-                // window.addEventListener('touchmove', () => clearInterval(scrollInterval), { once: true });
-            }
+      // Scroll the page
+      window.scrollTo(0, currentScroll + scrollStep);
 
-            autoScroll();
-        };
-    </script>
+      // If bottom of the window reaches bottom of <article>, stop
+      if (currentScroll + window.innerHeight >= articleBottom) {
+        clearInterval(scrollInterval);
+        
+        // Wait 3 seconds, then scroll back to top and repeat
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          autoScroll(); // Restart scrolling
+        }, 3000);
+      }
+    }, scrollSpeed);
+  }
+
+  autoScroll();
+};
+</script>
 </body>
 </html>
